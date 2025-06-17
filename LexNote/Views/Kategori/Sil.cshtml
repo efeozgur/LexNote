@@ -1,0 +1,16 @@
+﻿@model Kategori
+
+@{
+    ViewData["Title"] = "Kategori Sil";
+}
+
+<div class="container mt-4">
+    <h3>❗ Kategoriyi silmek üzeresiniz</h3>
+    <p><strong>@Model.Ad</strong> adlı kategoriyi silmek istediğinizden emin misiniz?</p>
+
+    <form asp-action="Sil" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">🗑️ Evet, Sil</button>
+        <a asp-action="Index" class="btn btn-secondary">İptal</a>
+    </form>
+</div>

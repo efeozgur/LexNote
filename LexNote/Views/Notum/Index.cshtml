@@ -1,0 +1,102 @@
+﻿@model List<LexNote.Models.Notum>
+@{
+    ViewData["Title"] = "Notlar";
+}
+
+<h2>🗂️ Notlar</h2>
+
+<!-- Arama -->
+<form method="get" class="mb-4">
+    <div class="input-group">
+        <input type="text" name="q" value="@ViewBag.Arama" class="form-control" placeholder="Başlık, içerik veya etiket..." />
+        <button type="submit" class="btn btn-outline-primary">Ara</button>
+        @if (!string.IsNullOrEmpty(ViewBag.Arama as string))
+        {
+            <a href="@Url.Action("Index", "Notum")" class="btn btn-outline-secondary">Temizle</a>
+        }
+    </div>
+</form>
+
+@if (!string.IsNullOrEmpty(ViewBag.Etiket as string))
+{
+    <div class="alert alert-info">
+        Etiket: <strong>@ViewBag.Etiket</strong>
+        <a href="@Url.Action("Index", "Notum")" class="btn btn-sm btn-outline-secondary ms-2">Filtreyi Temizle</a>
+    </div>
+}
+
+<a asp-action="Ekle" class="btn btn-success mb-3">+ Yeni Not</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Başlık</th>
+            <th>Etiketler</th>
+            <th>Kategori</th>
+            <th>Tarih</th>
+            <th>İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var not in Model)
+        {
+            <tr>
+                <td>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#modal@(not.Id)">@not.Baslik</a>
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(not.Etiketler))
+                    {
+                        var etiketler = not.Etiketler.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                        foreach (var etiket in etiketler)
+                        {
+                            <a asp-action="Index" asp-route-etiket="@etiket.Trim()" class="badge bg-secondary me-1">
+                                @etiket.Trim()
+                            </a>
+                        }
+                    }
+                </td>
+                <td>@not.Kategori?.Ad</td>
+                <td>@not.OlusturmaTarihi.ToString("dd.MM.yyyy HH:mm")</td>
+                <td>
+                    <a asp-action="Duzenle" asp-route-id="@not.Id" class="btn btn-sm btn-warning">✏</a>
+                    <a asp-action="Sil" asp-route-id="@not.Id" class="btn btn-sm btn-danger">🗑</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="5">
+                    <div class="modal fade" id="modal@(not.Id)" tabindex="-1" aria-labelledby="modalLabel@(not.Id)" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">@not.Baslik</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>Kategori:</strong> @not.Kategori?.Ad</p>
+                                    <p><strong>Etiketler:</strong> @not.Etiketler</p>
+                                    <p><strong>Tarih:</strong> @not.OlusturmaTarihi.ToString("dd.MM.yyyy HH:mm")</p>
+                                    <hr />
+                                    <div id="icerik@not.Id" class="markdown-content" data-md="@not.Icerik.Replace("\"", "&quot;")">
+                                        <!-- Buraya JS ile içerik işlenecek -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const mdBlocks = document.querySelectorAll(".markdown-content");
+                        mdBlocks.forEach(div => {
+                            const raw = div.dataset.md.replaceAll("\\n", "\n");
+                            const html = marked.parse(raw);
+                            div.innerHTML = html;
+                        });
+                    });
+                </script>
+            </tr>
+        }
+    </tbody>
+</table>

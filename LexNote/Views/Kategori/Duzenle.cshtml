@@ -1,0 +1,26 @@
+﻿@model Kategori
+
+@{
+    ViewData["Title"] = "Kategori Düzenle";
+}
+
+<div class="container mt-4">
+    <h2>✏️ Kategori Düzenle</h2>
+    <a asp-action="Index" class="btn btn-sm btn-outline-secondary mb-3">⬅ Geri Dön</a>
+
+    <form asp-action="Duzenle" method="post" class="needs-validation" novalidate>
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-group mb-3">
+            <label asp-for="Ad" class="form-label">Kategori Adı</label>
+            <input asp-for="Ad" class="form-control" required />
+            <span asp-validation-for="Ad" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">💾 Güncelle</button>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

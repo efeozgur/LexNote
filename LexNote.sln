@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36202.13 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LexNote", "LexNote\LexNote.csproj", "{1C4082F4-7EA6-4881-B683-B563B8E587ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C4082F4-7EA6-4881-B683-B563B8E587ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C4082F4-7EA6-4881-B683-B563B8E587ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C4082F4-7EA6-4881-B683-B563B8E587ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C4082F4-7EA6-4881-B683-B563B8E587ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F8034477-31E5-4FCD-81A3-BFB81056934C}
+	EndGlobalSection
+EndGlobal

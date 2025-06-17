@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Kategori>
+
+@{
+    ViewData["Title"] = "Kategoriler";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-3">📁 Kategoriler</h2>
+
+    <a asp-action="Ekle" class="btn btn-success mb-3">➕ Yeni Kategori Ekle</a>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">Henüz hiç kategori eklenmemiş.</div>
+    }
+    else
+    {
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Kategori Adı</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var kategori in Model)
+                {
+                    <tr>
+                        <td>@kategori.Id</td>
+                        <td>@kategori.Ad</td>
+                        <td>
+                            <a asp-action="Duzenle" asp-route-id="@kategori.Id" class="btn btn-sm btn-warning">✏️ Düzenle</a>
+                            <a asp-action="Sil" asp-route-id="@kategori.Id" class="btn btn-sm btn-danger">🗑️ Sil</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
