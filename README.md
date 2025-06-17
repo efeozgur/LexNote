@@ -136,10 +136,6 @@ dotnet ef database update
 dotnet run
 ```
 
-4. Tarayıcıdan `https://localhost:5001` ile aç.
-
----
-
 ## 📌 Notlar
 
 - `Etiketler` alanı virgülle ayrılır: `hukuk, mahkeme, tebligat`
