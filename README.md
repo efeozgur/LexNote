@@ -159,4 +159,4 @@ dotnet run
 
 ## 👨‍💻 Geliştiren
 
-Efe Özgür — [LexNote Projesi](https://github.com/)
+Efe Özgür — https://github.com/efeozgur/LexNote
