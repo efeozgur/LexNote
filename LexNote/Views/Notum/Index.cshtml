@@ -5,17 +5,54 @@
 
 <h2>🗂️ Notlar</h2>
 <div class="container">
-    <!-- Arama -->
+    @{
+        var kategoriler = ViewBag.Kategoriler as List<LexNote.Models.Kategori>;
+        int? seciliKategori = ViewBag.KategoriId as int?;
+    }
+
     <form method="get" class="mb-4">
-        <div class="input-group">
-            <input type="text" name="q" value="@ViewBag.Arama" class="form-control" placeholder="Başlık, içerik veya etiket..." />
-            <button type="submit" class="btn btn-outline-primary">Ara</button>
-            @if (!string.IsNullOrEmpty(ViewBag.Arama as string))
-            {
-                <a href="@Url.Action("Index", "Notum")" class="btn btn-outline-secondary">Temizle</a>
-            }
+        <div class="row g-2 align-items-center">
+            <div class="col-md-5">
+                <input type="text" name="q" value="@ViewBag.Arama" class="form-control" placeholder="Başlık, içerik veya etiket..." />
+            </div>
+            <div class="col-md-4">
+                <select name="kategoriId" class="form-select" onchange="this.form.submit()">
+                    <option value="">📂 Tüm Kategoriler</option>
+
+                    @foreach (LexNote.Models.Kategori kategori in ViewBag.Kategoriler)
+                    {
+                        string selected = "";
+                        if (Context.Request.Query["kategoriId"] == kategori.Id.ToString())
+                        {
+                            selected = "selected";
+                        }
+
+                        <option value="@kategori.Id" selected>@kategori.Ad</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-3 d-flex gap-2">
+                <button type="submit" class="btn btn-outline-primary">Ara</button>
+                @if (!string.IsNullOrEmpty(ViewBag.Arama as string) || seciliKategori.HasValue)
+                {
+                    <a href="@Url.Action("Index", "Notum")" class="btn btn-outline-secondary">Temizle</a>
+                }
+            </div>
         </div>
     </form>
+
+    <!-- Arama -->
+    @*<form method="get" class="mb-4">
+            <div class="input-group">
+                <input type="text" name="q" value="@ViewBag.Arama" class="form-control" placeholder="Başlık, içerik veya etiket..." />
+                <button type="submit" class="btn btn-outline-primary">Ara</button>
+                @if (!string.IsNullOrEmpty(ViewBag.Arama as string))
+                {
+                    <a href="@Url.Action("Index", "Notum")" class="btn btn-outline-secondary">Temizle</a>
+                }
+            </div>
+        </form>*@
 
     @if (!string.IsNullOrEmpty(ViewBag.Etiket as string))
     {

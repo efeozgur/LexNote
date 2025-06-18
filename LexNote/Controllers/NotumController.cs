@@ -20,7 +20,7 @@ namespace LexNote.Controllers
             ViewBag.Kategoriler = new SelectList(_context.Kategoriler.ToList(), "Id", "Ad");
         }
 
-        public IActionResult Index(string? q, string? etiket)
+        public IActionResult Index(string? q, string? etiket, int? kategoriId)
         {
             var notlar = _context.Notlar.Include(x => x.Kategori).ToList();
 
@@ -44,8 +44,17 @@ namespace LexNote.Controllers
                     .ToList();
             }
 
+            if (kategoriId.HasValue)
+            {
+                notlar = notlar
+                    .Where(n => n.KategoriId == kategoriId)
+                    .ToList();
+            }
+
             ViewBag.Arama = q;
             ViewBag.Etiket = etiket;
+            ViewBag.KategoriId = kategoriId;
+            ViewBag.Kategoriler = _context.Kategoriler.ToList();
 
             return View(notlar);
         }
