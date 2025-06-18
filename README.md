@@ -1,4 +1,4 @@
-# 🗂️ LexNote — Kurumsal Not Uygulaması
+# 🗂️ LexNote —  Not Uygulaması
 
 LexNote, ASP.NET Core MVC ile geliştirilmiş, not alma ve içerik düzenleme sistemidir.  
 Kategorili, etiket destekli, zengin içerikli notları kolayca arayabilir, düzenleyebilir ve modal üzerinden detaylarını görüntüleyebilirsiniz.
